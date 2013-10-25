@@ -41,6 +41,10 @@
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\.edn$" . clojure-mode))
 
+;; org-mode stuff
+(require 'org-install)
+(require 'ob-tangle)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
