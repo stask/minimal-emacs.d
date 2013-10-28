@@ -2,7 +2,7 @@
 
 (require 'cl)
 (defvar my-packages
-  '(clojure-mode magit nrepl paredit rainbow-delimiters solarized-theme)
+  '(clojure-mode magit nrepl paredit rainbow-delimiters solarized-theme elixir-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -36,10 +36,15 @@
 (add-hook 'nrepl-repl-mode-hook 'paredit-mode)
 (add-hook 'nrepl-repl-mode-hook 'rainbow-delimiters-mode)
 
-(setq clojure-docstring-indent-level 3)
-
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\.edn$" . clojure-mode))
+
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+
+(add-to-list 'auto-mode-alist '("\.exs$" . elixir-mode ))
+
+(add-to-list 'auto-mode-alist '("\.conf\.tmpl$" . yaml-mode))
 
 ;; org-mode stuff
 (require 'org-install)
@@ -54,6 +59,7 @@
  '(clojure-defun-indents (quote (context GET POST with-db)))
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(global-whitespace-mode t)
  '(ido-mode (quote both) nil (ido))
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
@@ -66,7 +72,9 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
- '(uniquify-ignore-buffers-re "^\\*"))
+ '(uniquify-ignore-buffers-re "^\\*")
+ '(whitespace-line-column 100)
+ '(whitespace-style (quote (face trailing space-before-tab empty space-after-tab))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
