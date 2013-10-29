@@ -1,8 +1,9 @@
+;; package setup stuff
 (package-initialize)
 
 (require 'cl)
 (defvar my-packages
-  '(clojure-mode magit nrepl paredit rainbow-delimiters solarized-theme elixir-mode yaml-mode)
+  '(clojure-mode magit cider paredit rainbow-delimiters solarized-theme elixir-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -18,6 +19,7 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+;;
 (server-start)
 
 ;; PATH
@@ -28,23 +30,40 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 (when window-system (set-exec-path-from-shell-PATH))
 
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+;; config
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq cider-repl-tab-command 'indent-for-tab-command)
+(setq cider-auto-select-error-buffer t)
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'nrepl-repl-mode-hook 'paredit-mode)
-(add-hook 'nrepl-repl-mode-hook 'rainbow-delimiters-mode)
 
+;; custom extension->mode mapping
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\.edn$" . clojure-mode))
 
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 
+(require 'elixir-mode) ;; have no idea why it's not required
 (add-to-list 'auto-mode-alist '("\.exs$" . elixir-mode ))
 
 (add-to-list 'auto-mode-alist '("\.conf\.tmpl$" . yaml-mode))
+;;
+
+;; some random goodies
+;; taken from https://gist.github.com/gnufied/7160310
+(global-set-key [f2] 'comment-region)
+(global-set-key [f3] 'uncommend-region)
+(global-set-key [f5] 'indent-region)
+(global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-s-<down>") 'shrink-window)
+(global-set-key (kbd "C-s-<up>") 'enlarge-window)
 
 ;; org-mode stuff
 (require 'org-install)
@@ -61,6 +80,7 @@
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(global-whitespace-mode t)
  '(ido-mode (quote both) nil (ido))
+ '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
  '(make-backup-files nil)
