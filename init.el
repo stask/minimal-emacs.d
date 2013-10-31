@@ -3,7 +3,8 @@
 
 (require 'cl)
 (defvar my-packages
-  '(clojure-mode magit cider paredit rainbow-delimiters solarized-theme elixir-mode yaml-mode)
+  '(clojure-mode magit cider paredit rainbow-delimiters solarized-theme elixir-mode
+                 yaml-mode markdown-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -53,6 +54,8 @@
 (add-to-list 'auto-mode-alist '("\.exs$" . elixir-mode ))
 
 (add-to-list 'auto-mode-alist '("\.conf\.tmpl$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\.cfg\.tmpl$" . js-mode))
+(add-to-list 'auto-mode-alist '("\.edn\.tmpl$" . clojure-mode))
 ;;
 
 ;; some random goodies
