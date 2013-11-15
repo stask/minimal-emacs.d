@@ -1,10 +1,13 @@
+;; frame setup
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 49)))
+
 ;; package setup stuff
 (package-initialize)
 
 (require 'cl)
 (defvar my-packages
   '(clojure-mode magit cider paredit rainbow-delimiters solarized-theme elixir-mode
-                 yaml-mode markdown-mode)
+                 yaml-mode markdown-mode gist haskell-mode erlang)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -23,10 +26,18 @@
 ;;
 (server-start)
 
+;; fullscreen stuff
+(defun toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+   nil 'fullscreen
+   (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
 ;; PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell
-	 (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
+         (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 (when window-system (set-exec-path-from-shell-PATH))
@@ -78,7 +89,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
- '(clojure-defun-indents (quote (context GET POST with-db)))
+ '(clojure-defun-indents (quote (context GET POST with-db wcar)))
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(global-whitespace-mode t)
@@ -92,6 +103,7 @@
  '(org-src-preserve-indentation t)
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(scroll-bar-mode nil)
+ '(sh-indentation 2)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
