@@ -2,6 +2,11 @@
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 49)))
 
 ;; package setup stuff
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
 (require 'cl)
@@ -103,7 +108,6 @@
  '(org-babel-load-languages (quote ((emacs-lisp . t) (clojure . t))))
  '(org-src-fontify-natively t)
  '(org-src-preserve-indentation t)
- '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(scroll-bar-mode nil)
  '(sh-indentation 2)
  '(show-paren-mode t)
