@@ -1,6 +1,8 @@
 ;; frame setup
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 49)))
 
+(setq default-directory "~/")
+
 ;; package setup stuff
 (require 'package)
 (add-to-list 'package-archives
@@ -94,7 +96,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
- '(clojure-defun-indents (quote (context GET POST with-db wcar)))
+ '(clojure-defun-indents (quote (context GET POST with-db wcar cond->)))
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(global-whitespace-mode t)
