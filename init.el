@@ -1,5 +1,5 @@
 ;; frame setup
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 49)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 52)))
 
 (setq default-directory "~/")
 
@@ -14,7 +14,8 @@
 (require 'cl)
 (defvar my-packages
   '(clojure-mode magit cider paredit rainbow-delimiters solarized-theme elixir-mode
-                 yaml-mode markdown-mode gist haskell-mode erlang)
+                 yaml-mode markdown-mode gist haskell-mode erlang
+                 dash-at-point)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -74,6 +75,8 @@
 (add-to-list 'auto-mode-alist '("\.conf\.tmpl$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\.cfg\.tmpl$" . js-mode))
 (add-to-list 'auto-mode-alist '("\.edn\.tmpl$" . clojure-mode))
+
+(global-set-key "\C-cd" 'dash-at-point)
 ;;
 
 ;; some random goodies
@@ -99,6 +102,7 @@
  '(clojure-defun-indents (quote (context GET POST with-db wcar cond->)))
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(dash-at-point-mode-alist (quote ((actionscript-mode . "actionscript") (arduino-mode . "arduino") (c++-mode . "cpp") (c-mode . "c") (clojure-mode . "clojure") (coffee-mode . "coffee") (common-lisp-mode . "lisp") (cperl-mode . "perl") (css-mode . "css") (elixir-mode . "elixir") (emacs-lisp-mode . "elisp") (enh-ruby-mode . "ruby") (erlang-mode . "erlang") (gfm-mode . "markdown") (go-mode . "go") (groovy-mode . "groovy") (haskell-mode . "haskell") (html-mode . "html") (java-mode . "java") (java-mode . "lucene") (js2-mode . "javascript") (js3-mode . "nodejs") (less-css-mode . "less") (lua-mode . "lua") (markdown-mode . "markdown") (objc-mode . "iphoneos") (perl-mode . "perl") (php-mode . "php") (processing-mode . "processing") (puppet-mode . "puppet") (python-mode . "python3") (ruby-mode . "ruby") (sass-mode . "sass") (scala-mode . "scala") (tcl-mode . "tcl") (vim-mode . "vim"))))
  '(global-whitespace-mode t)
  '(ido-enable-flex-matching t)
  '(ido-mode (quote both) nil (ido))
@@ -123,4 +127,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "apple" :family "Menlo")))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "apple" :family "Menlo")))))
