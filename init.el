@@ -15,7 +15,7 @@
 (defvar my-packages
   '(clojure-mode magit cider paredit rainbow-delimiters solarized-theme elixir-mode
                  yaml-mode markdown-mode gist haskell-mode erlang
-                 dash-at-point)
+                 dash-at-point spacegray-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -82,6 +82,9 @@
 (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "java-all"))
 (global-set-key "\C-cd" 'dash-at-point)
 ;;
+
+;; theme settings
+(global-hl-line-mode 1)
 
 ;; some random goodies
 ;; taken from https://gist.github.com/gnufied/7160310
@@ -162,15 +165,19 @@
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(clojure-defun-indents (quote (context GET PUT POST DELETE with-db wcar cond->)))
- '(custom-enabled-themes (quote (solarized-dark)))
- '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(compilation-message-face (quote default))
+ '(custom-enabled-themes (quote (spacegray)))
+ '(custom-safe-themes (quote ("53e29ea3d0251198924328fd943d6ead860e9f47af8d22f0b764d11168455a8e" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(global-whitespace-mode t)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-tail-colors (quote (("#073642" . 0) ("#546E00" . 20) ("#00736F" . 30) ("#00629D" . 50) ("#7B6000" . 60) ("#8B2C02" . 70) ("#93115C" . 85) ("#073642" . 100))))
  '(ido-enable-flex-matching t)
  '(ido-mode (quote both) nil (ido))
  '(ido-use-filename-at-point (quote guess))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
+ '(magit-diff-use-overlays nil)
  '(make-backup-files nil)
  '(org-babel-load-languages (quote ((emacs-lisp . t) (clojure . t))))
  '(org-src-fontify-natively t)
@@ -178,9 +185,17 @@
  '(scroll-bar-mode nil)
  '(sh-indentation 2)
  '(show-paren-mode t)
+ '(syslog-debug-face (quote ((t :background unspecified :foreground "#2aa198" :weight bold))))
+ '(syslog-error-face (quote ((t :background unspecified :foreground "#dc322f" :weight bold))))
+ '(syslog-hour-face (quote ((t :background unspecified :foreground "#859900"))))
+ '(syslog-info-face (quote ((t :background unspecified :foreground "#268bd2" :weight bold))))
+ '(syslog-ip-face (quote ((t :background unspecified :foreground "#b58900"))))
+ '(syslog-su-face (quote ((t :background unspecified :foreground "#d33682"))))
+ '(syslog-warn-face (quote ((t :background unspecified :foreground "#cb4b16" :weight bold))))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(uniquify-ignore-buffers-re "^\\*")
+ '(weechat-color-list (quote (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
  '(whitespace-line-column 100)
  '(whitespace-style (quote (face trailing space-before-tab empty space-after-tab))))
 (custom-set-faces
