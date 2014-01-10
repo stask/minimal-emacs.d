@@ -15,7 +15,8 @@
 (defvar my-packages
   '(clojure-mode magit cider paredit rainbow-delimiters solarized-theme elixir-mode
                  yaml-mode markdown-mode gist haskell-mode erlang
-                 dash-at-point spacegray-theme)
+                 dash-at-point spacegray-theme auto-complete ac-nrepl
+                 shell-switcher)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -35,12 +36,7 @@
 (server-start)
 
 ;; fullscreen stuff
-(defun toggle-fullscreen ()
-  "Toggle full screen"
-  (interactive)
-  (set-frame-parameter
-   nil 'fullscreen
-   (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+(setq ns-use-native-fullscreen nil)
 
 ;; PATH
 (defun set-exec-path-from-shell-PATH ()
@@ -63,6 +59,18 @@
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+
+;; ac-nrepl stuff
+(require 'auto-complete-config)
+(ac-config-default)
+
+(require 'ac-nrepl)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-repl-mode))
+(eval-after-load "cider"
+  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
 ;; custom extension->mode mapping
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
@@ -97,6 +105,8 @@
 (global-set-key (kbd "C-s-<up>") 'enlarge-window)
 
 (global-set-key "\C-xg" 'magit-status)
+
+(global-set-key [f9] 'hs-toggle-hiding)
 
 ;; org-mode stuff
 (require 'org-install)
@@ -163,10 +173,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])
  '(blink-cursor-mode nil)
- '(clojure-defun-indents (quote (context GET PUT POST DELETE with-db wcar cond->)))
+ '(clojure-defun-indents (quote (context GET PUT POST DELETE with-db wcar aset cond-> component/using section ul li build-all footer span transact! read div header p)))
  '(compilation-message-face (quote default))
- '(custom-enabled-themes (quote (spacegray)))
+ '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes (quote ("53e29ea3d0251198924328fd943d6ead860e9f47af8d22f0b764d11168455a8e" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(global-whitespace-mode t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
@@ -184,6 +195,7 @@
  '(org-src-preserve-indentation t)
  '(scroll-bar-mode nil)
  '(sh-indentation 2)
+ '(shell-switcher-mode t)
  '(show-paren-mode t)
  '(syslog-debug-face (quote ((t :background unspecified :foreground "#2aa198" :weight bold))))
  '(syslog-error-face (quote ((t :background unspecified :foreground "#dc322f" :weight bold))))
