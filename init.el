@@ -32,6 +32,37 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+;; eshell prompt
+(defvar eshell-vc-clean
+  " " "String to use for the prompt when there are no uncomitted checkins.")
+
+(defvar eshell-vc-dirty
+  " × " "String to use for the prompt when there are uncomitted checkins.")
+
+(defun eshell-vc-prompt ()
+  "Return a prompt with VC branch and dirty state."
+  (let ((branch (eshell/branch)))
+    (propertize (concat (and branch (concat "g:(" branch ")"
+                                            (if (eshell/vc-dirty)
+                                                eshell-vc-dirty
+                                              eshell-vc-clean)))
+                        (eshell/pwd)
+                        (cond ((= (user-uid) 0) " # ")
+                              (t " $ ")))
+                'face 'eshell-prompt)))
+
+(defun eshell-vc-skip-prompt ()
+  "Skip the prompt using text properties instead of a regex."
+  (goto-char (next-property-change (point) nil (point-max))))
+
+;; TODO: make this work with VC if possible rather than magit
+(require 'magit)
+(defalias 'eshell/branch 'magit-get-current-branch)
+(defun eshell/vc-dirty () (not (magit-everything-clean-p)))
+
+(setq eshell-prompt-function #'eshell-vc-prompt
+      eshell-skip-prompt-function #'eshell-vc-skip-prompt)
+
 ;;
 (server-start)
 
