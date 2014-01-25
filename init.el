@@ -1,29 +1,17 @@
-;; basic stuff
-
-;; ido
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-
-;; disable backup files
-(setq make-backup-files nil)
-
-;; disable auto-save
-(setq auto-save-default nil)
-
-(server-start)
-
-;; install packages
+(load "~/.emacs.d/general.el")
+(load "~/.emacs.d/env.el")
 (load "~/.emacs.d/packages.el")
-
-;; appearance stuff
-(load "~/.emacs.d/appearance.el")
-
-;; environment
-(load "~/.emacs.d/environment.el")
-
-;; general programming stuff
-(load "~/.emacs.d/programming.el")
-
-;; clojure stuff
+(load "~/.emacs.d/theme.el")
+(load "~/.emacs.d/ido.el")
+(load "~/.emacs.d/shell.el")
+(load "~/.emacs.d/uniquify.el")
+(load "~/.emacs.d/ac.el")
+(load "~/.emacs.d/git.el")
+(load "~/.emacs.d/parens.el")
 (load "~/.emacs.d/clojure.el")
+(load "~/.emacs.d/erlang.el")
+(load "~/.emacs.d/go.el")
+(load "~/.emacs.d/yaml.el")
+(load "~/.emacs.d/markdown.el")
+(load "~/.emacs.d/haskell.el")
+(load "~/.emacs.d/programming.el")

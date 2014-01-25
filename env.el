@@ -1,4 +1,3 @@
-;; PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell
 	 (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))

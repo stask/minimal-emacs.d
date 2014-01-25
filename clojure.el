@@ -1,4 +1,7 @@
-;; cider config
+(package-install-unless-installed 'clojure-mode)
+(package-install-unless-installed 'cider)
+(package-install-unless-installed 'ac-nrepl)
+
 (setq cider-auto-select-error-buffer t)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -8,7 +11,6 @@
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 
-;; ac-nrepl
 (require 'ac-nrepl)
 (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
 (add-hook 'cider-mode-hook 'ac-nrepl-setup)
@@ -17,7 +19,6 @@
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
-;; random stuff
 (require 'clojure-mode)
 (defun cider-namespace-refresh ()
   "Uses Stuart Sierra's clojure.tools.namespace to reload all changed namespaces."
