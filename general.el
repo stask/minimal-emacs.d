@@ -9,7 +9,6 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (show-paren-mode t)
-(setq show-paren-style 'expression)
 (set-frame-font "Menlo-13" nil t)
 (global-hl-line-mode t)
 
