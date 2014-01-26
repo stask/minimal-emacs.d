@@ -1,4 +1,5 @@
 (load "~/.emacs.d/general.el")
+(load "~/.emacs.d/keybindings.el")
 (load "~/.emacs.d/env.el")
 (load "~/.emacs.d/packages.el")
 (load "~/.emacs.d/theme.el")
@@ -8,6 +9,7 @@
 (load "~/.emacs.d/ac.el")
 (load "~/.emacs.d/git.el")
 (load "~/.emacs.d/parens.el")
+(load "~/.emacs.d/js.el")
 (load "~/.emacs.d/clojure.el")
 (load "~/.emacs.d/erlang.el")
 (load "~/.emacs.d/go.el")

@@ -1,3 +1,6 @@
 (require 'ido)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq ido-enable-prefix nil)
+(setq ido-enable-case nil)
+(setq ido-everywhere t)

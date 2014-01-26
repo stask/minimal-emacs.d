@@ -5,4 +5,9 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 
 (when window-system
-  (set-exec-path-from-shell-PATH))
+  (set-exec-path-from-shell-PATH)
+  (setenv "GOPATH" (expand-file-name "~/Projects/stask/go-musings/")))
+
+;; aliases
+(defalias 'e 'find-file)
+(defalias 'E 'find-file-other-window)
