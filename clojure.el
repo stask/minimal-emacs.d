@@ -10,6 +10,12 @@
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 
+;; custom indents
+(require 'clojure-mode)
+(put-clojure-indent 'div 'defun)
+(put-clojure-indent 'ul 'defun)
+(put-clojure-indent 'li 'defun)
+
 (require 'ac-nrepl)
 (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
 (add-hook 'cider-mode-hook 'ac-nrepl-setup)
