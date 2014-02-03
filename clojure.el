@@ -12,9 +12,15 @@
 
 ;; custom indents
 (require 'clojure-mode)
+;; compojure
+(put-clojure-indent 'context 'defun)
+(put-clojure-indent 'GET 'defun)
+;; om
 (put-clojure-indent 'div 'defun)
 (put-clojure-indent 'ul 'defun)
 (put-clojure-indent 'li 'defun)
+;; carmine
+(put-clojure-indent 'wcar* 'defun)
 
 (require 'ac-nrepl)
 (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
@@ -36,3 +42,41 @@
   "Uses Stuart Sierra's workflow to reload and restart Clojure application."
   (interactive)
   (cider-interactive-eval "(user/reset)"))
+
+;; cljsbuild support
+;; adopted from https://github.com/kototama/cljsbuild-mode/blob/master/cljsbuild-mode.el
+
+(require 'ansi-color)
+
+(defun cljsbuild--insertion-filter (proc string)
+  "When PROC sends STRING, apply ansi color codes and insert into buffer."
+  (with-current-buffer (process-buffer proc)
+	(let ((moving (= (point) (process-mark proc))))
+	  (save-excursion
+		(goto-char (process-mark proc))
+		(insert (ansi-color-apply string))
+		(set-marker (process-mark proc) (point)))
+	  (when moving
+		(goto-char (process-mark proc))))))
+
+(defun cljsbuild-auto (id)
+  "Run 'lein cljsbuild auto <id>' in a background buffer."
+  (interactive)
+  (let ((dir (locate-dominating-file default-directory "project.clj")))
+	(unless dir (error "Not inside a leiningen project"))
+	(with-current-buffer (get-buffer-create "*cljsbuild*")
+	  (when (get-buffer-process (current-buffer))
+		(error "lein cljsbuild is already running"))
+	  (cd dir)
+	  (buffer-disable-undo)
+	  (let* ((proc (start-process "cljsbuild"
+								  (current-buffer)
+								  "lein" "cljsbuild" "auto" id)))
+		;; colorize output
+		(set-process-filter proc 'cljsbuild--insertion-filter)
+		(font-lock-mode)
+		(message "started cljsbuild.")))))
+
+(defun cljsbuild-auto-dev ()
+  (interactive)
+  (cljsbuild-auto "dev"))
