@@ -1,6 +1,7 @@
 (package-install-unless-installed 'clojure-mode)
 (package-install-unless-installed 'cider)
 (package-install-unless-installed 'ac-nrepl)
+(package-install-unless-installed 'clj-refactor)
 
 (setq cider-auto-select-error-buffer t)
 
@@ -29,6 +30,12 @@
   '(add-to-list 'ac-modes 'cider-repl-mode))
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
+
+;; clj-refactor stuff
+(require 'clj-refactor)
+(add-hook 'clojure-mode-hook (lambda ()
+							   (clj-refactor-mode 1)
+							   (cljr-add-keybindings-with-prefix "C-c C-m")))
 
 (require 'clojure-mode)
 (defun cider-namespace-refresh ()
