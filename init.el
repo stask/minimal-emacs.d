@@ -11,6 +11,7 @@
 (load "~/.emacs.d/parens.el")
 (load "~/.emacs.d/js.el")
 (load "~/.emacs.d/clojure.el")
+(load "~/.emacs.d/ruby.el")
 (load "~/.emacs.d/erlang.el")
 (load "~/.emacs.d/go.el")
 (load "~/.emacs.d/yaml.el")
