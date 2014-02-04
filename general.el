@@ -11,6 +11,9 @@
 (show-paren-mode t)
 (set-frame-font "Menlo-13" nil t)
 (global-hl-line-mode t)
+(setq initial-frame-alist
+	  '((top . 0) (left . 0)
+		(width . 100) (height . 53)))
 
 ;; revert a buffer automagically if file is changed on disk
 (global-auto-revert-mode t)
